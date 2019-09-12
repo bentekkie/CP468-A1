@@ -3,7 +3,7 @@ import calculatepath as lib
 import networkx as nx
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
-figure(num=None, figsize=(20, 10), dpi=80, facecolor='w', edgecolor='k')
+figure(num=None, figsize=(23, 10), dpi=80, facecolor='w', edgecolor='k')
 
 G = nx.Graph()
 G.add_nodes_from(lib.adjList.keys())
@@ -20,3 +20,5 @@ nx.draw_kamada_kawai(
     labels={state:lib.stateToString(state) for state in lib.adjList.keys()},
     node_color=["#00FF00" if state in lib.correct_path else "#00FFFF" for state in list(G.nodes)],
     edge_color=["#00FF00" if edge in lib.correct_edges else "#000000" for edge in list(G.edges)])
+plt.savefig("Graph.png")
+#%%

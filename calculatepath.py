@@ -12,9 +12,9 @@ def neighbours(curr : tuple):
     d = -1 if curr[0] else 1
     other = not curr[0] 
     yield from (state for state in (
-        (other, curr[1]+(1*d), curr[2]),
-        (other, curr[1], curr[2]+(1*d)),
-        (other, curr[1]+(1*d), curr[2]+(1*d)),
+        (other, curr[1]+d, curr[2]),
+        (other, curr[1], curr[2]+d),
+        (other, curr[1]+d, curr[2]+d),
         (other, curr[1]+(2*d), curr[2]),
         (other, curr[1], curr[2]+(2*d)),
      ) if valid(state))
@@ -29,14 +29,7 @@ def path(curr, prev):
 def stateToString(state):
     return f"{n-state[1]}✝{n-state[2]}☺{('~>' if state[0] else '<~')}{state[1]}✝{state[2]}☺"
     
-
-for i in range(0,n+1):
-    for j in range(0,n+1):
-        states = [(True,i,j),(False,i,j)]
-        for state in states:
-            if valid(state):
-                adjList[state] = [x for x in neighbours(state)]
-
+adjList = {state:list(neighbours(state)) for i in range(0,n+1) for j in range(0,n+1) for state in ((True,i,j),(False,i,j)) if valid(state)}
 
 nodesToProcess =  Queue()
 nodesToProcess.put(start)
