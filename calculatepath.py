@@ -42,9 +42,8 @@ while not nodesToProcess.empty():
     if node in visited:
         continue
     visited.add(node)
-    adjList[node] = []
-    for x in neighbours(node):
-        adjList[node].append(x)
+    adjList[node] = neighbours(node)
+    for x in adjList[node]:
         if x not in prev:
             prev[x] = node
         if x not in visited:
@@ -52,7 +51,7 @@ while not nodesToProcess.empty():
 
 correct_path = list(reversed([x for x in path(end,prev)]))
 correct_edges = [tuple(sorted((correct_path[i],correct_path[i+1]))) for i in range(len(correct_path)-1)]
-
 if __name__ == "__main__":
+    prevState = None
     for state in correct_path:
         print(stateToString(state))
