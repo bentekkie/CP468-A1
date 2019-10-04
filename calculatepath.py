@@ -33,6 +33,8 @@ def stateToString(state : State):
 def edgeToString(edge : Tuple[State,State]):
     return f"\\{abs(edge[0][1]-edge[1][1])}✝{abs(edge[0][2]-edge[1][2])}☺/"
 
+allStates = {(boat,m,c) for boat in [True,False] for m in range(4) for c in range(4) if valid((boat,m,c))}
+
 nodesToProcess : "Queue[State]" =  Queue()
 nodesToProcess.put(start)
 visited : Set[State] = set()
